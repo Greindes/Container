@@ -5,11 +5,13 @@ CONFIG -= qt
 
 SOURCES += \
         array.cpp \
+        deque.cpp \
         list.cpp \
         main.cpp \
         vector.cpp
 
 HEADERS += \
     array.h \
+    deque.h \
     list.h \
     vector.h

@@ -90,5 +90,5 @@ void Vector<T>::set_size(size_t s)
 
 
 template class Vector<int>;
-
+template class Vector<int*>;
 
