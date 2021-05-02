@@ -7,9 +7,15 @@ Deque<T>::Deque() : data(10, nullptr)
 }
 
 template<class T>
+Deque<T>::~Deque()
+{
+    clear();
+}
+
+template<class T>
 void Deque<T>::push_back(const T &value)
 {
-    if (size == 0) {
+    if (data_size == 0) {
         backArrPos = data.size() / 2;
         backPos = CHUNK_SIZE / 2;
         frontArrPos = data.size() / 2;
@@ -26,13 +32,13 @@ void Deque<T>::push_back(const T &value)
         data[backArrPos] = new T[CHUNK_SIZE];
     }
     data[backArrPos][backPos++] = value;
-    ++size;
+    ++data_size;
 }
 
 template<class T>
 void Deque<T>::push_front(const T &value)
 {
-    if (size == 0) {
+    if (data_size == 0) {
         push_back(value);
         return;
     }
@@ -50,11 +56,57 @@ void Deque<T>::push_front(const T &value)
         data[frontArrPos] = new T[CHUNK_SIZE];
     }
     data[frontArrPos][--frontPos] = value;
-    ++size;
+    ++data_size;
 }
 
 template<class T>
-T &Deque<T>::operator[](size_t i)
+void Deque<T>::pop_back()
+{
+    if (data_size == 1) {
+        clear();
+        return;
+    }
+    if (backPos == 1) {
+        delete data[backArrPos--];
+        backPos = CHUNK_SIZE;
+    } else
+        --backPos;
+    --data_size;
+}
+
+template<class T>
+void Deque<T>::pop_front()
+{
+    if (data_size == 1) {
+        clear();
+        return;
+    }
+    if (frontPos == CHUNK_SIZE - 1) {
+        delete data[frontArrPos++];
+        frontPos = 0;
+    } else
+        ++frontPos;
+    --data_size;
+}
+
+template<class T>
+void Deque<T>::clear()
+{
+    if (data_size > 0) {
+        for (size_t i = frontArrPos; i <= backArrPos; ++i)
+            delete data[i];
+    }
+    data_size = 0;
+}
+
+template<class T>
+size_t Deque<T>::size() const
+{
+    return data_size;
+}
+
+template<class T>
+T& Deque<T>::operator[](size_t i)
 {
     size_t arrPos = i / CHUNK_SIZE;
     i = (i % CHUNK_SIZE) + frontPos;
@@ -65,5 +117,16 @@ T &Deque<T>::operator[](size_t i)
     return data[frontArrPos + arrPos][i];
 }
 
+template<class T>
+const T& Deque<T>::operator[](size_t i) const
+{
+    size_t arrPos = i / CHUNK_SIZE;
+    i = (i % CHUNK_SIZE) + frontPos;
+    if (i >= CHUNK_SIZE) {
+        i %= CHUNK_SIZE;
+        ++arrPos;
+    }
+    return data[frontArrPos + arrPos][i];
+}
 
 template class Deque<int>;
