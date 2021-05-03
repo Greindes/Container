@@ -32,6 +32,12 @@ size_t List<T>::size() const
 }
 
 template<class T>
+bool List<T>::empty() const
+{
+    return size() == 0;
+}
+
+template<class T>
 void List<T>::clear()
 {
     while (head) {

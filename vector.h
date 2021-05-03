@@ -17,6 +17,7 @@ public:
     void push_back(const T& val);
     void pop_back();
     size_t size() const;
+    bool empty() const;
     void clear();
 
     T& operator[](size_t n);
@@ -90,7 +91,7 @@ private:
 
 private:
     T* data;
-    size_t data_size;
+    size_t data_size = 0;
     size_t mem_size = 1000;
 
 

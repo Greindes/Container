@@ -1,19 +1,16 @@
 #include <iostream>
 #include"deque.h"
 #include"vector.h"
+#include"priorityqueue.h"
 
 int main()
 {
-    std::cout << "Hello, world";
-    Deque<int> deq;
-    for (int i = 100; i < 200; ++i)
-        deq.push_back(i);
-    for (int i = 0; i < 100; ++i)
-        deq.push_front(i);
-    while (deq.size() > 0) {
-        deq.pop_back();
-        deq.pop_front();
-        std::cout << deq.size() << ' ';
+    PriorityQueue<int> pq;
+    for (int x : {1, 3, 4, 2, 0, -5, 8, 25, -99, -123, 54, 124, 45})
+        pq.push(x);
+    while (!pq.empty()) {
+        std::cout << pq.top() << ' ';
+        pq.pop();
     }
     return 0;
 }

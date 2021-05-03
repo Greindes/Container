@@ -21,6 +21,7 @@ public:
     List<T>& operator=(const List<T>& l);
     void deepCopy(const List<T>& l);
     size_t size() const;
+    bool empty() const;
     void clear();
 
     void push_back(const T& value);

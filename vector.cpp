@@ -57,6 +57,12 @@ size_t Vector<T>::size() const
 }
 
 template<class T>
+bool Vector<T>::empty() const
+{
+    return size() == 0;
+}
+
+template<class T>
 void Vector<T>::clear()
 {
     data_size = 0;

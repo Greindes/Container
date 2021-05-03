@@ -8,10 +8,14 @@ SOURCES += \
         deque.cpp \
         list.cpp \
         main.cpp \
+        priorityqueue.cpp \
+        set.cpp \
         vector.cpp
 
 HEADERS += \
     array.h \
     deque.h \
     list.h \
+    priorityqueue.h \
+    set.h \
     vector.h
