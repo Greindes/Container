@@ -19,6 +19,7 @@ public:
     size_t size() const;
     bool empty() const;
     void clear();
+    void resize(size_t n, const T& val);
 
     T& operator[](size_t n);
     const T& operator[](size_t n) const;
@@ -87,7 +88,7 @@ public:
     const_iterator cend() const { return const_iterator(data + size()); }
 
 private:
-    void set_size(size_t s);
+    void reserve(size_t s);
 
 private:
     T* data;

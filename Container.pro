@@ -10,6 +10,7 @@ SOURCES += \
         main.cpp \
         priorityqueue.cpp \
         set.cpp \
+        unorderedset.cpp \
         vector.cpp
 
 HEADERS += \
@@ -18,4 +19,5 @@ HEADERS += \
     list.h \
     priorityqueue.h \
     set.h \
+    unorderedset.h \
     vector.h
