@@ -11,6 +11,7 @@ public:
     Vector();
     Vector(size_t N, const T& val);
     Vector(const Vector<T>& vec);
+    Vector(std::initializer_list<T> init);
     ~Vector();
     Vector<T>& operator=(const Vector<T>& vec);
 

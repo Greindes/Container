@@ -8,6 +8,13 @@ List<T>::List()
 }
 
 template<class T>
+List<T>::List(std::initializer_list<T> init)
+{
+    for (auto p = init.begin(); p != init.end(); ++p)
+        push_back(*p);
+}
+
+template<class T>
 List<T>::~List()
 {
     clear();

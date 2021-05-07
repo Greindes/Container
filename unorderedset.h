@@ -15,6 +15,7 @@ private:
     };
 public:
     UnorderedSet();
+    UnorderedSet(std::initializer_list<T> init);
     UnorderedSet(const UnorderedSet<T, Hash>&) = delete;
     ~UnorderedSet();
     UnorderedSet<T, Hash>& operator=(const UnorderedSet<T, Hash>&) = delete;

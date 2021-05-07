@@ -28,6 +28,15 @@ Vector<T>::Vector(const Vector<T> &vec) : mem_size(vec.mem_size)
 }
 
 template<class T>
+Vector<T>::Vector(std::initializer_list<T> init)
+{
+    mem_size = std::max(mem_size, init.size() * 2);
+    data = new T[mem_size];
+    for (auto p = init.begin(); p != init.end(); ++p)
+        push_back(*p);
+}
+
+template<class T>
 Vector<T>::~Vector()
 {
     delete[] data;

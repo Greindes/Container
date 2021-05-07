@@ -17,6 +17,7 @@ private:
 public:
     List();
     List(const List<T>& l);
+    List(std::initializer_list<T> init);
     ~List();
     List<T>& operator=(const List<T>& l);
     void deepCopy(const List<T>& l);

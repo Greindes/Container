@@ -12,6 +12,7 @@ class Array
 public:
     Array();
     Array(const Array<T, N>& arr);
+    Array(std::initializer_list<T> init);
     ~Array();
 
     size_t size() const;

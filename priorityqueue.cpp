@@ -7,6 +7,13 @@ PriorityQueue<T>::PriorityQueue()
 }
 
 template<class T>
+PriorityQueue<T>::PriorityQueue(std::initializer_list<T> init)
+{
+    for (auto p = init.begin(); p != init.end(); ++p)
+        push(*p);
+}
+
+template<class T>
 void PriorityQueue<T>::push(const T &value)
 {
     data.push_back(value);

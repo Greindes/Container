@@ -16,6 +16,15 @@ Array<T, N>::Array(const Array<T, N> &arr)
         data[i] = arr[i];
 }
 
+template<class T, size_t N>
+Array<T, N>::Array(std::initializer_list<T> init)
+{
+    createData();
+    size_t i = 0;
+    for (auto p = init.begin(); p != init.end(); ++p)
+        data[i++] = *p;
+}
+
 template<class T, unsigned int N>
 Array<T, N>::~Array()
 {

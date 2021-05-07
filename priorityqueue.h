@@ -8,6 +8,7 @@ class PriorityQueue
 {
 public:
     PriorityQueue();
+    PriorityQueue(std::initializer_list<T> init);
     PriorityQueue(const PriorityQueue<T>&) = delete;
     PriorityQueue<T>& operator=(const PriorityQueue<T>&) = delete;
     void push(const T& value);

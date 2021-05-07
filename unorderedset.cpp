@@ -11,6 +11,17 @@ UnorderedSet<T, Hash>::UnorderedSet()
 }
 
 template<class T, class Hash>
+UnorderedSet<T, Hash>::UnorderedSet(std::initializer_list<T> init)
+{
+    bucket_count = std::max(bucket_count, init.size() * 2);
+    data = new Node*[bucket_count];
+    for (size_t i = 0; i < bucket_count; ++i)
+        data[i] = nullptr;
+    for (auto p = init.begin(); p != init.end(); ++p)
+        insert(*p);
+}
+
+template<class T, class Hash>
 UnorderedSet<T, Hash>::~UnorderedSet()
 {
     clear();
