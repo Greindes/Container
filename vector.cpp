@@ -8,6 +8,16 @@ Vector<T>::Vector()
 }
 
 template<class T>
+Vector<T>::Vector(size_t N, const T &val)
+{
+    mem_size = std::max(N * 2, mem_size);
+    data = new T[mem_size];
+    for (size_t i = 0; i  < N; ++i)
+        data[i] = val;
+    data_size = N;
+}
+
+template<class T>
 Vector<T>::Vector(const Vector<T> &vec) : mem_size(vec.mem_size)
 {
     data = new T[mem_size];

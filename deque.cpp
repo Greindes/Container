@@ -106,6 +106,12 @@ size_t Deque<T>::size() const
 }
 
 template<class T>
+bool Deque<T>::empty() const
+{
+    return size() == 0;
+}
+
+template<class T>
 T& Deque<T>::operator[](size_t i)
 {
     size_t arrPos = i / CHUNK_SIZE;

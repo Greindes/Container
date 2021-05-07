@@ -5,21 +5,29 @@
 template<class T, class Hash>
 UnorderedSet<T, Hash>::UnorderedSet()
 {
-    data.resize(bucket_count, nullptr);
+    data = new Node*[bucket_count];
+    for (size_t i = 0; i < bucket_count; ++i)
+        data[i] = nullptr;
 }
 
 template<class T, class Hash>
 UnorderedSet<T, Hash>::~UnorderedSet()
 {
     clear();
+    delete [] data;
 }
 
 
 template<class T, class Hash>
 void UnorderedSet<T, Hash>::insert(const T &value)
 {
+    /*проверка общей загруженности бакетов
+      и увеличение их количества при высокой загруженности
+      (высокой вероятности не константного времени выполнения основных операций)*/
+    if (float(item_count) / bucket_count > max_load)
+        rehash(bucket_count * 2);
+
     size_t i = bucket(value);
-    std::cout << "Bucket for " << value << " is " << i << '\n';
     Node * ptr = data[i];
     data[i] = new Node(value);
     data[i]->next = ptr;
@@ -77,6 +85,33 @@ template<class T, class Hash>
 size_t UnorderedSet<T, Hash>::bucket(const T &value) const
 {
     return hash(value) % bucket_count;
+}
+
+template<class T, class Hash>
+void UnorderedSet<T, Hash>::rehash(size_t n)
+{
+    size_t old_size = bucket_count;
+    Node ** old_data = data;
+    bucket_count = n;
+    data = new Node*[bucket_count];
+    for (size_t i = 0; i < bucket_count; ++i)
+        data[i] = nullptr;
+    //перемещение данных в новый массив указателей из старого
+    //с обновлением бакетов каждого элемента
+    for (size_t i = 0; i < old_size; ++i) {
+        while (old_data[i] != nullptr) {
+            Node * ptr = old_data[i];
+            old_data[i] = ptr->next;
+            ptr->next = nullptr;
+            //позиция текущего элемента при новом количестве бакетов
+            size_t new_pos = bucket(ptr->value);
+            if (data[new_pos] != nullptr)
+                ptr->next = data[new_pos];
+            data[new_pos] = ptr;
+        }
+    }
+
+    delete [] old_data;
 }
 
 

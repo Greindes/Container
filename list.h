@@ -42,8 +42,8 @@ public:
     public:
         using difference_type = std::ptrdiff_t;
         using value_type = T;
-        using pointer = typename std::conditional<Const, const value_type*, value_type*>::type;
-        using reference = typename std::conditional<Const, const value_type&, value_type&>::type;
+        using pointer = std::conditional_t<Const, const value_type*, value_type*>;
+        using reference = std::conditional_t<Const, const value_type&, value_type&>;
         using iterator_category = std::bidirectional_iterator_tag;
 
         reference operator*() const { return ptr->value; }

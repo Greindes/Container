@@ -1,5 +1,5 @@
 TEMPLATE = app
-CONFIG += console c++11
+CONFIG += console c++14
 CONFIG -= app_bundle
 CONFIG -= qt
 
@@ -7,11 +7,11 @@ SOURCES += \
         array.cpp \
         deque.cpp \
         list.cpp \
-        main.cpp \
         priorityqueue.cpp \
         set.cpp \
         unorderedset.cpp \
-        vector.cpp
+        vector.cpp \
+        main.cpp
 
 HEADERS += \
     array.h \

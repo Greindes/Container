@@ -2,7 +2,7 @@
 #define UNORDEREDSET_H
 
 #include<functional>
-#include"vector.h"
+//#include"vector.h"
 
 template<class T, class Hash = std::hash<T>>
 class UnorderedSet
@@ -10,7 +10,7 @@ class UnorderedSet
 private:
     struct Node {
         T value;
-        Node * next;
+        Node * next = nullptr;
         Node(const T& val) : value(val) {}
     };
 public:
@@ -27,12 +27,12 @@ public:
 
 private:
     size_t bucket(const T& value) const;
-    //void rehash(size_t n);
+    void rehash(size_t n);
 
     Hash hash;
     size_t bucket_count = 1000;
     size_t item_count = 0;
-    Vector<Node*> data;
+    Node** data;
 
     static constexpr float max_load = 1.0;
 };
